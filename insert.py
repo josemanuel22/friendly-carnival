@@ -93,7 +93,7 @@ elif args.subparser == "datalab":
     for f in files: total += os.path.getsize(f)
     for f in files:
         if args.auto_generate_index_suffix==True:
-            date = re.findall(r"\b([0-9]{4})[-/:]([0-9]{1,2})[-/:]([0-9]{1,2})\b",f)
+            date = re.findall(r"([0-9]{4})[-/:]([0-9]{1,2})[-/:]([0-9]{1,2})",f)
             if args.frecuency == 'DAILY':
                 index_suffix=date[0][0]+"."+date[0][1]+"."+date[0][2]
             elif args.frecuency == 'MONTHLY':
