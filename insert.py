@@ -112,6 +112,6 @@ elif args.subparser == "samp":
     total = 0;total_inserted = 0;
     for f in files: total += os.path.getsize(f)
         for f in files:
-        datalab.src.importers.samp_importers.samp_import(f,kairos_server)
-        total_inserted += os.path.getsize(f);
-        print("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
+            datalab.src.importers.samp_importers.samp_import(f,kairos_server)
+            total_inserted += os.path.getsize(f);
+            print("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
