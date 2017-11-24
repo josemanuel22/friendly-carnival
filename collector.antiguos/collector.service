@@ -1,0 +1,6 @@
+[Unit]
+Description=Collector present data of alog and inserted in datalab
+
+[Service]
+Type=idle
+ExecStart=/diska/vlt/anaconda3/bin/python3.6 /vlt/collector/datalab_essencials.py

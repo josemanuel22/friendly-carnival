@@ -1,0 +1,35 @@
+INFO:datalab_logger:reading database[Query. May Take Time]...
+INFO:datalab_logger:finish to query database
+DEBUG:datalab_logger:Inserted 114 data : 204 (status code)
+DEBUG:datalab_logger:Inserted 2 data : 204 (status code)
+INFO:datalab_logger:reading database[Query. May Take Time]...
+INFO:datalab_logger:finish to query database
+INFO:datalab_logger:reading database[Query. May Take Time]...
+INFO:datalab_logger:finish to query database
+DEBUG:datalab_logger:Inserted 100 data : 204 (status code)
+INFO:datalab_logger:Inserted 100 data : 204 (status code)
+DEBUG:datalab_logger:Inserted 2 data : 204 (status code)
+INFO:datalab_logger:reading database[Query. May Take Time]...
+INFO:datalab_logger:finish to query database
+DEBUG:datalab_logger:Inserted 1694 data : 204 (status code)
+INFO:datalab_logger:Inserted 1694 data : 204 (status code)
+INFO:datalab_logger:Inserted 1694 data, time 2017-10-17 09:13:02.571460 - 2017-10-17 09:14:42.571460 response [with compression]: 	204 (status code)
+DEBUG:datalab_logger:
+INFO:datalab_logger:reading database[Query. May Take Time]...
+INFO:datalab_logger:finish to query database
+DEBUG:datalab_logger:Inserted 1913 data : 204 (status code)
+INFO:datalab_logger:Inserted 1913 data : 204 (status code)
+INFO:datalab_logger:Inserted 1913 data, time 2017-10-17 09:11:22.571460 - 2017-10-17 09:13:02.571460 response [with compression]: 	204 (status code)
+DEBUG:datalab_logger:
+INFO:datalab_logger:reading database[Query. May Take Time]...
+INFO:datalab_logger:finish to query database
+DEBUG:datalab_logger:Inserted 2033 data : 204 (status code)
+INFO:datalab_logger:Inserted 2033 data : 204 (status code)
+INFO:datalab_logger:Inserted 2033 data, time 2017-10-17 09:09:42.571460 - 2017-10-17 09:11:22.571460 response [with compression]: 	204 (status code)
+DEBUG:datalab_logger:
+INFO:datalab_logger:reading database[Query. May Take Time]...
+INFO:datalab_logger:finish to query database
+DEBUG:datalab_logger:Inserted 727 data : 204 (status code)
+INFO:datalab_logger:Inserted 727 data : 204 (status code)
+INFO:datalab_logger:Inserted: 727 data : time 2017-10-17 17:16:23.144840 - 2017-10-17 17:17:23.144840 :  204 (status code)
+DEBUG:datalab_logger:
