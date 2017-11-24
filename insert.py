@@ -7,6 +7,11 @@ import re
 import glob
 import os
 
+from datalab.src.loggers import datalab_loggers
+
+datalab_logger_importer = datalab_loggers.datalab_logger(my_format=datalab_loggers.DATALAB_LOGGER_FORMAT)
+datalab_logger_importer = datalab_logger_es_object.datalab_logger
+
 parser = argparse.ArgumentParser(prog='Insert csv')
 subparser = parser.add_subparsers(dest="subparser")
 
@@ -63,7 +68,7 @@ if args.subparser == "kairos":
     for f in files:
         datalab.src.importers.csv_importers.csv_kairos_import(f, kairos_server)
         total_inserted += os.path.getsize(f);
-        print("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
+        datalab_logger_es_inserters.info("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
 elif args.subparser == "es":
     files = glob.glob(args.path_to_csvs)
     es_server= args.es_server
@@ -83,7 +88,7 @@ elif args.subparser == "es":
             index_suffix=args.index_suffix 
         datalab.src.importers.csv_importers.csv_es_import(f, es_server, chunksize=chunksize, index_suffix=index_suffix)
         total_inserted += os.path.getsize(f)
-        print("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
+        datalab_logger_es_inserters.info("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
 elif args.subparser == "datalab":
     files = glob.glob(args.path_to_csvs)
     kairos_server=args.kairos_server
@@ -104,7 +109,7 @@ elif args.subparser == "datalab":
             index_suffix=args.index_suffix
         datalab.src.importers.csv_importers.csv_import_file(f, kairos_server, es_server, es_chunksize=chunksize, index_suffix=index_suffix)
         total_inserted += os.path.getsize(f)
-        print("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
+        datalab_logger_es_inserters.info("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
 
 elif args.subparser == "samp":
     files = glob.glob(args.path_to_csvs)
@@ -114,4 +119,4 @@ elif args.subparser == "samp":
     for f in files:
         datalab.src.importers.samp_importers.samp_import(f,kairos_server)
         total_inserted += os.path.getsize(f);
-        print("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
+        datalab_logger_es_inserters.info("%f MB of %f MB"%(total_inserted/1000000.0, total/1000000.0))
