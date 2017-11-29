@@ -47,7 +47,7 @@ parser_es.add_argument(
         '-frecuency', type=str, help='frecuency add to es index', choices=['DAILY','MONTHLY','YEARLY'], required=False, default='MONTHLY')
 parser_es.add_argument(
         '-index_suffix', type=bool, help='Index suffix to add in case auto_generate_index_suffix is false', required=False)
-parser_datalab.add_argument(
+parser_es.add_argument(
         '-reinsert',  type=bool, help='if true it reinsert the files even if it is already in the database', required=False, default=False)
 parser_es.add_argument(
         '-chunksize',  type=str, help='Number of data readof the csv in one shot', required=False, default="50000")
