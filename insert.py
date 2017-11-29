@@ -7,10 +7,25 @@ import re
 import glob
 import os
 
+from elasticsearch import Elasticsearch
+from elasticsearch_dsl import Search
 from datalab.src.loggers import datalab_loggers
 
 datalab_logger_object_importer = datalab_loggers.datalab_logger(my_format=datalab_loggers.DATALAB_LOGGER_FORMAT)
 datalab_logger_importer = datalab_logger_object_importer.datalab_logger
+
+
+
+def _getoghost(f):
+    i = f.find('/', 0)
+    while -1 != i:
+        i+=1
+        j=i
+        i = f.find('/', i)
+    k = f[j:].find('.')
+    return f[j:j+k]
+
+
 
 parser = argparse.ArgumentParser(prog='Insert csv')
 subparser = parser.add_subparsers(dest="subparser")
@@ -48,6 +63,8 @@ parser_datalab.add_argument(
         '-frecuency', type=str, help='frecuency add to es index', choices=['DAILY','MONTHLY','YEARLY'], required=False, default='MONTHLY')
 parser_datalab.add_argument(
         '-index_suffix', type=bool, help='Index suffix to add in case auto_generate_index_suffix is false', required=False)
+parser_datalab.add_argument(
+        '-reinsert',  type=bool, help='if true it reinsert the files even if it is already in the database', required=False, default=False)
 parser_datalab.add_argument(
         '-chunksize',  type=str, help='Number of data readof the csv in one shot', required=False, default="50000")
 
@@ -107,6 +124,12 @@ elif args.subparser == "datalab":
                 index_suffix=date[0][0]
         else:
             index_suffix=args.index_suffix
+        if args.reinsert == False:
+            client = Elasticsearch(es_server)
+            loghost = _getoghost(f)
+            s = Search(using=client, index="vltlog-"+index_suffix).query("match", logtext="Creating empty file to archive normal logs").filter("term",loghost=loghost)
+            if s.execute():
+                continue;
         datalab.src.importers.csv_importers.csv_import_file(f, kairos_server, es_server, es_chunksize=chunksize, index_suffix=index_suffix)
         total_inserted += os.path.getsize(f)
         datalab_logger_importer.info("File %s %f MB of %f MB"%(f, total_inserted/1000000.0, total/1000000.0))
