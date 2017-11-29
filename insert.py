@@ -47,6 +47,8 @@ parser_es.add_argument(
         '-frecuency', type=str, help='frecuency add to es index', choices=['DAILY','MONTHLY','YEARLY'], required=False, default='MONTHLY')
 parser_es.add_argument(
         '-index_suffix', type=bool, help='Index suffix to add in case auto_generate_index_suffix is false', required=False)
+parser_datalab.add_argument(
+        '-reinsert',  type=bool, help='if true it reinsert the files even if it is already in the database', required=False, default=False)
 parser_es.add_argument(
         '-chunksize',  type=str, help='Number of data readof the csv in one shot', required=False, default="50000")
 
@@ -102,7 +104,13 @@ elif args.subparser == "es":
             elif args.frecuency == 'YEARLY':
                 index_suffix=date[0][0]
         else:
-            index_suffix=args.index_suffix 
+            index_suffix=args.index_suffix
+        if args.reinsert == False:
+            client = Elasticsearch(es_server)
+            loghost = _getoghost(f)
+            s = Search(using=client, index="vltlog-"+index_suffix).query("match", logtext="Creating empty file to archive normal logs").filter("term",loghost=loghost)
+            if s.execute():
+                continue; 
         datalab.src.importers.csv_importers.csv_es_import(f, es_server, chunksize=chunksize, index_suffix=index_suffix)
         total_inserted += os.path.getsize(f)
         datalab_logger_importer.info("File $s %f MB of %f MB"%(f, total_inserted/1000000.0, total/1000000.0))
