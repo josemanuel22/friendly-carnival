@@ -135,12 +135,14 @@ elif args.subparser == "datalab":
         if args.reinsert == False:
             client = Elasticsearch(es_server)
             loghost = _getoghost(f)
-            s = Search(using=client, index="vltlog-"+index_suffix).query("match", logtext="Creating empty file to archive normal logs").filter("term",loghost=loghost)
-            if s.execute():
-                continue;
-        datalab.src.importers.csv_importers.csv_import_file(f, kairos_server, es_server, es_chunksize=chunksize, index_suffix=index_suffix)
-        total_inserted += os.path.getsize(f)
-        datalab_logger_importer.info("File %s %f MB of %f MB"%(f, total_inserted/1000000.0, total/1000000.0))
+            aux = pd.read_csv(filepath_or_buffer=file, names=CSV_VLTLOG_OPSLOG_HEADER, compression='gzip', na_values=[""], parse_dates=['tm'], engine='c', , encoding='latin-1', na_filter=False)
+            s = Search(using=client, index="vltlog-"+index_suffix).query("match", logtext=aux[-1:]['logtext'].values[0]).filter("term",loghost=aux[-1:]['loghost'].values[0])
+            q = s[0:30].execute()
+            for i in q:
+                if pd.to_datetime(i['@timestamp']) == aux[-1:]['tm'].values[0]:
+                    datalab.src.importers.csv_importers.csv_import_file(f, kairos_server, es_server, es_chunksize=chunksize, index_suffix=index_suffix)
+                    total_inserted += os.path.getsize(f)
+                    datalab_logger_importer.info("File %s %f MB of %f MB"%(f, total_inserted/1000000.0, total/1000000.0))
 
 elif args.subparser == "samp":
     files = glob.glob(args.path_to_csvs)
