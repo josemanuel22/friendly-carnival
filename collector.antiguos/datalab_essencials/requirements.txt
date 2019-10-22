@@ -157,7 +157,7 @@ pdfkit==0.6.1
 pep8==1.7.0
 pexpect==4.2.1
 pickleshare==0.7.4
-Pillow==4.3.0
+Pillow==6.2.0
 pivottablejs==0.8.0
 plotly==2.0.15
 ply==3.10
