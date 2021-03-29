@@ -176,7 +176,7 @@ pycrypto==2.6.1
 pycurl==7.43.0
 pyelasticsearch==1.4
 pyflakes==1.5.0
-Pygments==2.2.0
+Pygments==2.7.4
 pygpu==0.7.4
 pylint==1.6.4
 pymc3==3.2
