@@ -184,7 +184,7 @@ pyodbc==4.0.16
 PyOpenGL==3.1.1a1
 pyOpenSSL==17.0.0
 pyparsing==2.1.4
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 pyqtgraph==0.10.0
 PySocks==1.6.7
 pytest==3.0.7
