@@ -124,7 +124,7 @@ nb-anacondacloud==1.4.0
 nb-conda==2.2.1
 nb-conda-kernels==2.1.0
 nbbrowserpdf==0.2.1
-nbconvert==4.3.0
+nbconvert==6.5.1
 nbformat==4.4.0
 nbpresent==3.0.2
 networkx==1.11
